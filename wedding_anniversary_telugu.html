@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>శుభ వివాహ వార్షికోత్సవం</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Sans+Telugu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --maroon:#6B1A1A;
+  --deep-maroon:#3D0A0A;
+  --gold:#C9922A;
+  --gold-light:#E8C96A;
+  --gold-bright:#F5D678;
+  --cream:#F7EDD8;
+  --cream-dark:#EDD9A3;
+  --copper:#B5651D;
+  --antique-red:#8B2020;
+  --sandalwood:#D2A679;
+  --parchment:#F2E0B0;
+  --shadow-gold:rgba(201,146,42,0.35);
+}
+
+html,body{width:100%;min-height:100%;overflow-x:hidden;}
+
+/* ===== LOADING SCREEN ===== */
+#loading{
+  position:fixed;inset:0;z-index:9999;
+  background:radial-gradient(ellipse at center,#2A0A0A 0%,#0D0000 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 0.8s ease,visibility 0.8s;
+}
+#loading.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.loading-mandala{
+  width:120px;height:120px;border:3px solid var(--gold);border-radius:50%;
+  position:relative;animation:spinMandala 4s linear infinite;margin-bottom:24px;
+}
+.loading-mandala::before,.loading-mandala::after{
+  content:'';position:absolute;inset:8px;border-radius:50%;border:2px solid var(--gold-light);
+}
+.loading-mandala::after{inset:18px;border-color:var(--gold-bright);animation:spinMandala 2s linear infinite reverse;}
+.loading-inner{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Great Vibes',cursive;font-size:28px;color:var(--gold-bright);
+}
+@keyframes spinMandala{to{transform:rotate(360deg);}}
+.loading-text{
+  font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;
+  color:var(--gold-light);text-transform:uppercase;animation:pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+
+/* ===== BODY ===== */
+body{
+  background:radial-gradient(ellipse at 50% 30%,#2A0A0A 0%,#0D0000 60%,#050000 100%);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond','Noto Sans Telugu',serif;overflow-y:auto;padding:20px;
+}
+
+/* ===== PARTICLES ===== */
+#particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
+
+/* ===== PETALS ===== */
+.petal{position:fixed;pointer-events:none;z-index:1;font-size:12px;opacity:0;animation:petalFall linear infinite;}
+@keyframes petalFall{
+  0%{transform:translateY(-20px) rotate(0deg) translateX(0);opacity:0.8;}
+  50%{transform:translateY(50vh) rotate(180deg) translateX(30px);opacity:0.6;}
+  100%{transform:translateY(110vh) rotate(360deg) translateX(-20px);opacity:0;}
+}
+
+/* ===== CARD SCENE WRAPPER ===== */
+#card-scene{position:relative;z-index:10;width:min(720px,96vw);}
+
+/* ===== CLOSED CARD ===== */
+#closed-card{
+  position:relative;width:100%;cursor:pointer;
+  transform-style:preserve-3d;transition:transform 0.15s ease;
+}
+#closed-card:hover{transform:rotateY(-3deg) rotateX(2deg) translateY(-8px);}
+
+.card-face{
+  width:100%;
+  background:linear-gradient(160deg,#4A0E0E 0%,#6B1A1A 30%,#3D0A0A 70%,#5A1212 100%);
+  border-radius:4px;position:relative;overflow:hidden;
+  box-shadow:
+    0 0 0 3px var(--gold),0 0 0 6px var(--deep-maroon),
+    0 0 0 9px var(--gold),0 25px 60px rgba(0,0,0,0.8),
+    0 0 80px rgba(201,146,42,0.15),inset 0 0 60px rgba(0,0,0,0.3);
+  padding:32px;min-height:520px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.card-face::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;mix-blend-mode:overlay;
+}
+.card-face::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(245,214,120,0.08) 50%,transparent 60%);
+  animation:shimmer 4s ease-in-out infinite;pointer-events:none;
+}
+@keyframes shimmer{0%,100%{opacity:0;transform:translateX(-100%);}50%{opacity:1;transform:translateX(100%);}}
+
+.inner-border{position:absolute;inset:14px;border:1.5px solid var(--gold);border-radius:2px;pointer-events:none;}
+.inner-border::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,146,42,0.4);border-radius:1px;}
+
+.corner{position:absolute;width:40px;height:40px;}
+.corner svg{width:100%;height:100%;}
+.corner.tl{top:14px;left:14px;}
+.corner.tr{top:14px;right:14px;transform:scaleX(-1);}
+.corner.bl{bottom:14px;left:14px;transform:scaleY(-1);}
+.corner.br{bottom:14px;right:14px;transform:scale(-1,-1);}
+
+.top-flourish{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--gold-light);text-transform:uppercase;margin-bottom:10px;opacity:0.8;}
+.divider-gold{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:8px auto;}
+.divider-gold.wide{width:280px;}
+.om-symbol{font-size:36px;color:var(--gold-bright);text-shadow:0 0 20px var(--shadow-gold);margin:8px 0;line-height:1;}
+
+.card-main-title{
+  font-family:'Great Vibes',cursive;font-size:clamp(38px,7vw,60px);
+  color:var(--gold-bright);text-align:center;line-height:1.15;
+  text-shadow:0 0 30px rgba(245,214,120,0.9),0 0 60px rgba(201,146,42,0.5),0 2px 4px rgba(0,0,0,0.5);
+  animation:goldGlow 3s ease-in-out infinite;margin:12px 0;
+}
+@keyframes goldGlow{
+  0%,100%{text-shadow:0 0 20px rgba(245,214,120,0.7),0 0 40px rgba(201,146,42,0.4);}
+  50%{text-shadow:0 0 40px rgba(245,214,120,1),0 0 80px rgba(201,146,42,0.7),0 0 120px rgba(201,146,42,0.3);}
+}
+.card-subtitle{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--sandalwood);letter-spacing:2px;text-align:center;margin:4px 0;}
+.click-hint{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-top:18px;opacity:0.7;animation:blink 2.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:0.4;}50%{opacity:1;}}
+.mandala-top,.mandala-bottom{display:flex;justify-content:center;margin:8px 0;}
+.mandala-top svg,.mandala-bottom svg{width:120px;height:60px;opacity:0.8;}
+
+/* ===== OPEN CARD CONTAINER ===== */
+#card-open-container{display:none;position:relative;width:100%;}
+
+/* ===== BOOK SPREAD ===== */
+#book-spread{
+  position:relative;
+  width:100%;
+  /* Height set by JS after render, uses min-height as fallback */
+  min-height:600px;
+  perspective:2600px;
+  perspective-origin:50% 40%;
+}
+
+/* Left & Right static page backgrounds */
+.spread-half{position:absolute;top:0;bottom:0;width:50%;pointer-events:none;z-index:0;}
+.spread-half.left{left:0;}
+.spread-half.right{right:0;}
+.spread-bg{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#F7EDD8 0%,#F2E0B0 40%,#EDD9A3 100%);
+}
+.spread-bg.left-bg{
+  box-shadow:
+    -3px 0 0 var(--gold),-6px 0 0 #8B6914,-9px 0 0 var(--gold),
+    -20px 20px 60px rgba(0,0,0,0.5),inset 0 0 30px rgba(139,101,20,0.06);
+}
+.spread-bg.right-bg{
+  box-shadow:
+    3px 0 0 var(--gold),6px 0 0 #8B6914,9px 0 0 var(--gold),
+    20px 20px 60px rgba(0,0,0,0.5),inset 0 0 30px rgba(139,101,20,0.06);
+}
+
+/* Spine */
+.book-spine{
+  position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);
+  width:20px;z-index:60;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,0.45),rgba(201,146,42,0.12) 50%,rgba(0,0,0,0.45));
+  box-shadow:0 0 8px rgba(0,0,0,0.3);
+}
+
+/* ===== LEAVES ===== */
+/*
+  Book layout — 4 content pages, 3 leaves:
+  leaf-1  front = page-1  (first right page, spread 0)
+  leaf-1  back  = page-2  (left page, spread 1)
+  leaf-2  front = page-3  (right page, spread 1)
+  leaf-2  back  = page-4  (left page, spread 2)
+  leaf-3  front = page-5  (right page, spread 2) -- blank / last cover
+  (we only have 4 content pages so leaf-3 front is an ornamental end page)
+
+  Actually with 4 pages we have:
+  Spread 0:  [blank-left]  [page-1-right]   leaf-1 at 0deg
+  Spread 1:  [page-2-left] [page-3-right]   leaf-1 at -180deg, leaf-2 at 0deg
+  Spread 2:  [page-4-left] [blank-right]    leaf-1 -180, leaf-2 -180deg
+
+  So we need 2 leaves only, but we need a permanent left-side half bg and right-side half bg.
+  The page content sits inside the leaf faces.
+*/
+.leaf{
+  position:absolute;
+  top:0;right:0;
+  width:50%;height:100%;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  cursor:pointer;
+}
+
+.leaf-face{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  overflow:hidden;
+}
+.leaf-face.front{
+  transform:rotateY(0deg);
+  background:linear-gradient(160deg,#F7EDD8 0%,#F2E0B0 40%,#EDD9A3 100%);
+  box-shadow:inset -8px 0 24px rgba(0,0,0,0.15);
+}
+.leaf-face.back{
+  transform:rotateY(180deg);
+  background:linear-gradient(200deg,#F2E0B0 0%,#F7EDD8 40%,#EDD9A3 100%);
+  box-shadow:inset 8px 0 24px rgba(0,0,0,0.12);
+}
+/* Paper texture on faces */
+.leaf-face::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.5;mix-blend-mode:multiply;
+}
+/* Right-edge curl shadow on front face */
+.leaf-face.front::after{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:28px;
+  background:linear-gradient(to right,transparent,rgba(0,0,0,0.14));pointer-events:none;
+}
+
+/* ===== PAGE CONTENT inside leaf faces ===== */
+/* Back face content: rotate the back face itself; inner page content remains normal for LTR reading */
+.leaf-face.back .page-wrap{
+  direction:ltr;
+}
+
+/* ===== PAGE STYLES ===== */
+.page-wrap{
+  position:absolute;inset:0;
+  padding:22px 18px 16px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transform-style:preserve-3d;
+}
+.page-inner-border{
+  position:absolute;inset:14px;
+  border:1.5px solid var(--gold);pointer-events:none;
+  z-index:0;
+}
+.page-inner-border::before{
+  content:'';position:absolute;inset:6px;
+  border:0.5px solid rgba(201,146,42,0.5);
+}
+.page-corner{position:absolute;width:44px;height:44px;pointer-events:none;z-index:1;}
+.page-corner.tl{top:14px;left:14px;}
+.page-corner.tr{top:14px;right:14px;transform:scaleX(-1);}
+.page-corner.bl{bottom:14px;left:14px;transform:scaleY(-1);}
+.page-corner.br{bottom:14px;right:14px;transform:scale(-1,-1);}
+
+.page-header{text-align:center;margin-bottom:14px;position:relative;z-index:1;}
+.page-title{font-family:'Great Vibes',cursive;font-size:clamp(24px,4vw,38px);color:var(--maroon);text-shadow:0 2px 4px rgba(107,26,26,0.2);line-height:1.2;}
+.page-subtitle{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--copper);text-transform:uppercase;margin-top:4px;}
+.gold-divider{width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent);margin:7px auto;}
+
+/* ===== FLORAL CORNER ANIMATION ===== */
+.floral-anim{
+  position:absolute;pointer-events:none;z-index:0;
+  font-size:22px;opacity:0.18;animation:floralSway 5s ease-in-out infinite;
+}
+.floral-anim.tl{top:22px;left:22px;}
+.floral-anim.tr{top:22px;right:22px;animation-delay:1.2s;}
+.floral-anim.bl{bottom:22px;left:22px;animation-delay:2.4s;}
+.floral-anim.br{bottom:22px;right:22px;animation-delay:3.6s;}
+@keyframes floralSway{0%,100%{transform:rotate(-5deg) scale(1);}50%{transform:rotate(5deg) scale(1.1);}}
+
+/* ===== PAGE 1: HEART / COUPLE ===== */
+.heart-section{display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;margin-top:4px;}
+.heart-frame-wrap{position:relative;width:180px;height:180px;animation:floatHeart 4s ease-in-out infinite;}
+@keyframes floatHeart{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.heart-glow{position:absolute;inset:-16px;border-radius:50%;background:radial-gradient(ellipse,rgba(201,146,42,0.3) 0%,transparent 70%);animation:heartGlow 2.5s ease-in-out infinite;pointer-events:none;}
+@keyframes heartGlow{0%,100%{opacity:0.5;}50%{opacity:1;}}
+.heart-svg{width:180px;height:180px;}
+.couple-name{font-family:'Great Vibes',cursive;font-size:clamp(18px,3.5vw,28px);color:var(--deep-maroon);text-align:center;margin-top:10px;}
+.anniversary-badge{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--copper);text-align:center;margin-top:4px;letter-spacing:1px;}
+.year-count{font-family:'Cinzel',serif;font-size:30px;font-weight:600;color:var(--maroon);text-align:center;margin:6px 0;}
+.year-label{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;color:var(--copper);text-transform:uppercase;}
+
+/* ===== GALLERY GRID ===== */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative;z-index:1;margin-top:6px;flex:1;}
+.gallery-item{
+  position:relative;aspect-ratio:1;overflow:hidden;
+  border:1.5px solid var(--gold);
+  box-shadow:0 3px 10px rgba(0,0,0,0.18),inset 0 0 6px rgba(201,146,42,0.1);
+  cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;
+}
+.gallery-item:hover{transform:scale(1.04);box-shadow:0 6px 20px rgba(0,0,0,0.25),0 0 16px rgba(201,146,42,0.4);}
+.img-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#EDD9A3 0%,#D2A679 50%,#C9922A22 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  min-height:70px;
+}
+.img-placeholder span{font-size:18px;opacity:0.4;}
+.img-placeholder p{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;color:var(--copper);text-align:center;padding:0 4px;opacity:0.7;}
+.gallery-overlay{position:absolute;inset:0;background:rgba(61,10,10,0.0);transition:background 0.3s;}
+.gallery-item:hover .gallery-overlay{background:rgba(61,10,10,0.12);}
+.corner-ornament{position:absolute;width:12px;height:12px;background:var(--gold);clip-path:polygon(0 0,100% 0,100% 20%,20% 20%,20% 100%,0 100%);pointer-events:none;}
+.corner-ornament.tl{top:0;left:0;}
+.corner-ornament.tr{top:0;right:0;transform:scaleX(-1);}
+.corner-ornament.bl{bottom:0;left:0;transform:scaleY(-1);}
+.corner-ornament.br{bottom:0;right:0;transform:scale(-1,-1);}
+
+/* ===== ALT GALLERY (page 3) ===== */
+.gallery-alt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative;z-index:1;margin-top:6px;flex:1;}
+.gallery-alt .gallery-item.tall{grid-row:span 2;}
+
+/* ===== VIDEO SECTION ===== */
+.video-section{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;margin-top:4px;flex:1;}
+.video-frame-wrap{position:relative;width:100%;max-width:100%;}
+.video-outer-border{
+  border:2px solid var(--gold);
+  box-shadow:0 0 0 1px var(--deep-maroon),0 0 0 3px var(--gold),0 12px 40px rgba(0,0,0,0.4);
+  background:#0D0000;padding:14px;position:relative;
+}
+.video-frame-deco{
+  position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);
+  background:var(--cream);padding:0 12px;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--maroon);text-transform:uppercase;
+}
+.video-placeholder{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg,#1A0505 0%,#3D0A0A 50%,#1A0505 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  cursor:pointer;position:relative;overflow:hidden;
+}
+.play-btn{
+  width:50px;height:50px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold-bright),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--deep-maroon);
+  box-shadow:0 0 24px rgba(201,146,42,0.6);transition:transform 0.2s;
+}
+.play-btn:hover{transform:scale(1.1);}
+.play-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-light);text-transform:uppercase;}
+.video-actual{width:100%;height:auto;display:none;}
+
+/* ===== NAV AREA ===== */
+.nav-area{display:flex;justify-content:space-between;align-items:center;margin-top:12px;position:relative;z-index:1;flex-shrink:0;}
+.nav-btn{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--maroon);background:transparent;border:1px solid var(--gold);
+  padding:6px 14px;cursor:pointer;transition:all 0.3s;
+}
+.nav-btn:hover{background:var(--maroon);color:var(--cream);border-color:var(--maroon);}
+.nav-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.nav-dots{display:flex;gap:7px;align-items:center;}
+.nav-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(107,26,26,0.2);border:1px solid var(--gold);cursor:pointer;
+  transition:all 0.3s;
+}
+.nav-dot.active{background:var(--maroon);box-shadow:0 0 6px rgba(107,26,26,0.5);}
+
+/* ===== GLOBAL NAV BAR ===== */
+#global-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:16px;padding:0 4px;position:relative;z-index:20;
+}
+.gnav-dots{display:flex;gap:8px;align-items:center;}
+.gnav-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:rgba(201,146,42,0.25);border:1.5px solid var(--gold);
+  cursor:pointer;transition:all 0.3s;
+}
+.gnav-dot.active{background:var(--gold-bright);box-shadow:0 0 10px rgba(201,146,42,0.6);}
+
+/* ===== LIGHTBOX ===== */
+#lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;}
+#lightbox.open{display:flex;}
+#lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border:3px solid var(--gold);box-shadow:0 0 60px rgba(201,146,42,0.4);}
+#lightbox-bg-placeholder{max-width:90vw;max-height:85vh;width:500px;height:350px;border:3px solid var(--gold);background:linear-gradient(135deg,#2A0A0A,#6B1A1A);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(201,146,42,0.4);}
+#lightbox-close{position:fixed;top:24px;right:32px;font-family:'Cinzel',serif;font-size:22px;color:var(--gold);cursor:pointer;background:none;border:1px solid var(--gold);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+#lightbox-close:hover{background:var(--gold);color:var(--deep-maroon);}
+
+/* ===== MUSIC TOGGLE ===== */
+#music-toggle{position:fixed;bottom:20px;right:20px;z-index:500;width:44px;height:44px;border-radius:50%;background:var(--gold);border:2px solid var(--deep-maroon);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,0.4);transition:all 0.3s;}
+#music-toggle:hover{transform:scale(1.1);}
+#music-toggle.muted{opacity:0.6;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  body{padding:10px;}
+  .card-face{padding:18px;min-height:400px;}
+  .page-wrap{padding:14px 12px 10px;}
+  .heart-frame-wrap{width:140px;height:140px;}
+  .heart-svg{width:140px;height:140px;}
+  .gallery-grid,.gallery-alt{gap:5px;}
+  .page-title{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading">
+  <div class="loading-mandala"><div class="loading-inner">ॐ</div></div>
+  <div class="loading-text">ఆహ్వానపత్రిక సిద్ధమవుతోంది…</div>
+</div>
+
+<!-- PARTICLES -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" style="display:none;">
+  <div id="lightbox-bg-placeholder" style="display:none;"></div>
+</div>
+
+<!-- Line 420 — AFTER this line: -->
+<div id="music-toggle" onclick="toggleMusic()" title="Toggle Music">🎵</div>
+
+<!-- ADD this below it: -->
+<audio id="bg-music" loop>
+  <source src="effects/WhatsApp Audio 2026-05-12 at 9.31.45 AM.mpeg" type="audio/mpeg">
+</audio>
+<!-- MAIN SCENE -->
+<div id="card-scene">
+
+  <!-- ======= CLOSED CARD (Front Cover) ======= -->
+  <div id="closed-card" onclick="openCard()">
+    <div class="card-face">
+      <div class="inner-border">
+        <div class="corner tl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2L38 2L38 6L6 6L6 38L2 38Z" fill="#C9922A" opacity="0.8"/><path d="M6 6L20 6L20 10L10 10L10 20L6 20Z" fill="#E8C96A" opacity="0.6"/><circle cx="8" cy="8" r="3" fill="#F5D678" opacity="0.7"/></svg></div>
+        <div class="corner tr"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2L38 2L38 6L6 6L6 38L2 38Z" fill="#C9922A" opacity="0.8"/><path d="M6 6L20 6L20 10L10 10L10 20L6 20Z" fill="#E8C96A" opacity="0.6"/><circle cx="8" cy="8" r="3" fill="#F5D678" opacity="0.7"/></svg></div>
+        <div class="corner bl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2L38 2L38 6L6 6L6 38L2 38Z" fill="#C9922A" opacity="0.8"/><path d="M6 6L20 6L20 10L10 10L10 20L6 20Z" fill="#E8C96A" opacity="0.6"/><circle cx="8" cy="8" r="3" fill="#F5D678" opacity="0.7"/></svg></div>
+        <div class="corner br"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2L38 2L38 6L6 6L6 38L2 38Z" fill="#C9922A" opacity="0.8"/><path d="M6 6L20 6L20 10L10 10L10 20L6 20Z" fill="#E8C96A" opacity="0.6"/><circle cx="8" cy="8" r="3" fill="#F5D678" opacity="0.7"/></svg></div>
+      </div>
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;">
+        <div class="top-flourish">— ✦ శుభ వివాహ వార్షికోత్సవం ✦ —</div>
+        <div class="divider-gold wide"></div>
+        <div class="om-symbol">ॐ</div>
+        <div class="mandala-top">
+          <svg viewBox="0 0 120 60" fill="none"><g stroke="#C9922A" stroke-width="0.8" opacity="0.9"><ellipse cx="60" cy="30" rx="50" ry="25"/><ellipse cx="60" cy="30" rx="35" ry="18"/><line x1="10" y1="30" x2="110" y2="30" stroke-width="0.5"/><line x1="60" y1="5" x2="60" y2="55" stroke-width="0.5"/><path d="M20 10 Q60 30 100 10" stroke-width="0.7"/><path d="M20 50 Q60 30 100 50" stroke-width="0.7"/><circle cx="60" cy="30" r="6" fill="#C9922A" opacity="0.4"/><circle cx="60" cy="30" r="3" fill="#F5D678" opacity="0.8"/><path d="M30 15 Q40 25 30 35" stroke-width="0.6"/><path d="M90 15 Q80 25 90 35" stroke-width="0.6"/><circle cx="12" cy="30" r="2.5" fill="#E8C96A" opacity="0.6"/><circle cx="108" cy="30" r="2.5" fill="#E8C96A" opacity="0.6"/><circle cx="60" cy="5.5" r="2.5" fill="#E8C96A" opacity="0.6"/><circle cx="60" cy="54.5" r="2.5" fill="#E8C96A" opacity="0.6"/></g></svg>
+        </div>
+        <h1 class="card-main-title">వివాహ వార్షికోత్సవ<br>శుభాకాంక్షలు</h1>
+        <div class="card-subtitle">ప్రేమతో, ఆశీర్వాదాలతో &amp; శాశ్వత ఆనందంతో</div>
+        <div class="divider-gold"></div>
+        <div class="mandala-bottom">
+          <svg viewBox="0 0 160 48" fill="none"><g stroke="#C9922A" stroke-width="0.8" opacity="0.85"><path d="M5 24 Q40 6 80 24 Q120 42 155 24"/><path d="M5 24 Q40 42 80 24 Q120 6 155 24"/><circle cx="5" cy="24" r="3" fill="#E8C96A" opacity="0.7"/><circle cx="155" cy="24" r="3" fill="#E8C96A" opacity="0.7"/><circle cx="80" cy="24" r="5" fill="#C9922A" opacity="0.5"/><circle cx="80" cy="24" r="2.5" fill="#F5D678" opacity="0.9"/><path d="M30 12 L30 36 M50 8 L50 40 M110 8 L110 40 M130 12 L130 36" stroke-width="0.5" opacity="0.5"/></g></svg>
+        </div>
+        <div class="click-hint">✦ తెరవడానికి నొక్కండి ✦</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= OPEN BOOK ======= -->
+  <div id="card-open-container">
+
+    <!-- BOOK SPREAD -->
+    <div id="book-spread">
+      <!-- Static half backgrounds -->
+      <div class="spread-half left"><div class="spread-bg left-bg"></div></div>
+      <div class="spread-half right"><div class="spread-bg right-bg"></div></div>
+      <div class="book-spine"></div>
+
+      <!--
+        LEAF-1: front=page-1 (right, spread 0)  back=page-2 (left, spread 1)
+        LEAF-2: front=page-3 (right, spread 1)  back=page-4 (left, spread 2)
+        LEAF-3: front=page-5 (right, spread 2)  back=back-cover (unused)
+        
+        All leaves sit on the RIGHT initially (transform-origin: left).
+        Flipping = rotateY(-180deg), which swings page to the left side.
+      -->
+
+      <!-- LEAF 1 -->
+      <div class="leaf" id="leaf-1">
+        <div class="leaf-face front" id="lf-1-front">
+          <div class="page-wrap" id="pg-render-1"><!-- page 1 built by JS --></div>
+        </div>
+        <div class="leaf-face back" id="lf-1-back">
+          <div class="page-wrap" id="pg-render-2"><!-- page 2 built by JS --></div>
+        </div>
+      </div>
+
+      <!-- LEAF 2 -->
+      <div class="leaf" id="leaf-2">
+        <div class="leaf-face front" id="lf-2-front">
+          <div class="page-wrap" id="pg-render-3"><!-- page 3 built by JS --></div>
+        </div>
+        <div class="leaf-face back" id="lf-2-back">
+          <div class="page-wrap" id="pg-render-4"><!-- page 4 built by JS --></div>
+        </div>
+      </div>
+
+      <!-- LEAF 3 -->
+      <div class="leaf" id="leaf-3">
+        <div class="leaf-face front" id="lf-3-front">
+          <div class="page-wrap" id="pg-render-5"><!-- page 5 built by JS --></div>
+        </div>
+        <div class="leaf-face back">
+          <!-- back cover — ornamental end page -->
+          <div class="page-wrap" style="background:linear-gradient(160deg,#4A0E0E,#3D0A0A);display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;opacity:0.5;">
+              <div style="font-family:'Great Vibes',cursive;font-size:32px;color:var(--gold-bright);">శుభం</div>
+              <div style="font-size:24px;margin-top:8px;">❤️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end book-spread -->
+
+    <!-- GLOBAL NAVIGATION -->
+    <div id="global-nav">
+      <button class="nav-btn" id="btn-prev" onclick="flipBack()" disabled>◀ వెనక్కి</button>
+      <div class="gnav-dots" id="gnav-dots">
+        <!-- built by JS -->
+      </div>
+      <button class="nav-btn" id="btn-next" onclick="flipForward()">తదుపరి ▶</button>
+    </div>
+
+  </div><!-- end card-open-container -->
+</div><!-- end card-scene -->
+
+<script>
+// ============================
+// CONFIG
+// ============================
+const CONFIG = {
+  groomName: "గూడూరు సూర్యనారాయణ రెడ్డి",
+  brideName: " గూడూరు శ్రీదేవి ",
+  years: 21,
+  videoSrc: "effects/Video Project 5.mp4"
+};
+
+// ============================
+// PAGE CONTENT BUILDERS
+// ============================
+// Corner SVG shorthand
+const CORNER_SVG = `<svg viewBox="0 0 48 48" fill="none"><path d="M2 2L46 2L46 7L7 7L7 46L2 46Z" fill="#C9922A" opacity="0.7"/><circle cx="9" cy="9" r="4" fill="#F5D678" opacity="0.8"/><path d="M7 14L18 14L18 18L11 18L11 25L7 25Z" fill="#E8C96A" opacity="0.5"/></svg>`;
+const CORNER_SVG2 = `<svg viewBox="0 0 48 48" fill="none"><path d="M2 2L46 2L46 7L7 7L7 46L2 46Z" fill="#C9922A" opacity="0.7"/><circle cx="9" cy="9" r="4" fill="#F5D678" opacity="0.8"/></svg>`;
+
+function pageShell(floralTL,floralTR,floralBL,floralBR,cornerSvg){
+  return `
+    <div class="page-inner-border"></div>
+    <div class="floral-anim tl">${floralTL}</div>
+    <div class="floral-anim tr">${floralTR}</div>
+    <div class="floral-anim bl">${floralBL}</div>
+    <div class="floral-anim br">${floralBR}</div>
+    <div class="page-corner tl">${cornerSvg}</div>
+    <div class="page-corner tr">${cornerSvg}</div>
+    <div class="page-corner bl">${cornerSvg}</div>
+    <div class="page-corner br">${cornerSvg}</div>
+  `;
+}
+
+function pageHeader(label,title,subtitle){
+  return `
+    <div class="page-header">
+      <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--copper);text-transform:uppercase;">— ${label} —</div>
+      <div class="gold-divider"></div>
+      <h2 class="page-title">${title}</h2>
+      <div class="page-subtitle">${subtitle}</div>
+      <div class="gold-divider"></div>
+    </div>
+  `;
+}
+
+function galleryItem(idx,gallery,icon,label){
+  return `<div class="gallery-item" onclick="openLightbox(${idx},'${gallery}')">
+    <div class="img-placeholder"><span>${icon}</span><p>${label}</p></div>
+    <div class="gallery-overlay"></div>
+    <div class="corner-ornament tl"></div><div class="corner-ornament tr"></div>
+    <div class="corner-ornament bl"></div><div class="corner-ornament br"></div>
+  </div>`;
+}
+
+// ---- BUILD PAGE 1: Couple / Heart ----
+function buildPage1(el){
+  el.innerHTML = pageShell('❀','✿','✿','❀',CORNER_SVG) + pageHeader('శుభ మంగళం','ఒక ప్రేమ కథ<br>కాలం గుండా','ఒక జీవితకాల ప్రేమను సంబురంగా జరుపుకుందాం') + `
+    <div class="heart-section">
+      <div class="heart-frame-wrap">
+        <div class="heart-glow"></div>
+        <svg class="heart-svg" viewBox="0 0 220 220" fill="none">
+          <defs>
+            <clipPath id="heartClip"><path d="M110 185 C60 155 10 120 10 75 C10 45 35 20 65 20 C80 20 95 28 110 42 C125 28 140 20 155 20 C185 20 210 45 210 75 C210 120 160 155 110 185Z"/></clipPath>
+          </defs>
+          <path d="M110 192 C55 158 5 118 5 70 C5 36 32 12 65 12 C81 12 97 21 110 38 C123 21 139 12 155 12 C188 12 215 36 215 70 C215 118 165 158 110 192Z" fill="rgba(201,146,42,0.15)"/>
+          <path d="M110 188 C58 155 8 116 8 72 C8 40 34 16 65 16 C81 16 97 25 110 41 C123 25 139 16 155 16 C186 16 212 40 212 72 C212 116 162 155 110 188Z" stroke="#C9922A" stroke-width="2.5" fill="none"/>
+          <path d="M110 184 C62 152 12 114 12 72 C12 43 37 20 65 20 C80 20 95 29 110 44 C125 29 140 20 155 20 C183 20 208 43 208 72 C208 114 158 152 110 184Z" stroke="#F5D678" stroke-width="1" fill="none"/>
+          <foreignObject x="8" y="12" width="204" height="176" clip-path="url(#heartClip)">
+            <!-- REPLACE WITH: -->
+        <div xmlns="http://www.w3.org/1999/xhtml" style="width:204px;height:176px;">
+          <img src="effects/WhatsApp Image 2026-05-10 at 6.37.25 PM (2).jpeg" style="width:100%;height:100%;object-fit:cover;"/>
+        </div>
+          </foreignObject>
+          <g opacity="0.75">
+            <circle cx="110" cy="8" r="4" fill="#F5D678"/>
+            <path d="M98 6 Q110 2 122 6" stroke="#C9922A" stroke-width="1" fill="none"/>
+            <circle cx="8" cy="70" r="3" fill="#E8C96A"/>
+            <circle cx="212" cy="70" r="3" fill="#E8C96A"/>
+            <ellipse cx="50" cy="30" rx="6" ry="3" fill="#C9922A" opacity="0.4" transform="rotate(-40 50 30)"/>
+            <ellipse cx="170" cy="30" rx="6" ry="3" fill="#C9922A" opacity="0.4" transform="rotate(40 170 30)"/>
+          </g>
+        </svg>
+      </div>
+      <h3 class="couple-name">${CONFIG.groomName} &amp; ${CONFIG.brideName}</h3>
+      <div class="anniversary-badge">— వారి వివాహ వార్షికోత్సవం —</div>
+      <div class="year-count">${CONFIG.years}</div>
+      <div class="year-label">సంవత్సరాల అనుబంధం</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:var(--copper);margin-top:6px;text-align:center;">"రెండు ఆత్మలు, ఒకే హృదయస్పందన, జీవితకాల జ్ఞాపకాలు"</div>
+    </div>
+    <div class="nav-area">
+      <div></div>
+      <div class="nav-dots">
+        <div class="nav-dot active"></div><div class="nav-dot"></div>
+        <div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div>
+      </div>
+      <button class="nav-btn" onclick="flipForward()">జ్ఞాపకాలు →</button>
+    </div>
+  `;
+}
+
+// ---- BUILD PAGE 2: Gallery 1 — Golden Memories ----
+function buildPage2(el){
+  let grid = '';
+  const imgs = ['effects/IMG_20260510_192646.jpg.jpeg','effects/IMG_20260510_192727.jpg.jpeg','effects/IMG_20260510_192528.jpg.jpeg','effects/IMG_20260510_192614.jpg.jpeg','effects/IMG_20260510_193555.jpg.jpeg','effects/IMG_20260510_192449.jpg.jpeg','effects/IMG_20260510_192830.jpg.jpeg','effects/IMG_20260510_192257.jpg.jpeg','effects/IMG_20260510_193131.jpg.jpeg'];
+for(let i=1;i<=9;i++) grid += `<div class="gallery-item" onclick="openLightbox(${i},'gallery1')">
+  <img src="${imgs[i-1]}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"/>
+  <div class="gallery-overlay"></div>
+  <div class="corner-ornament tl"></div><div class="corner-ornament tr"></div>
+  <div class="corner-ornament bl"></div><div class="corner-ornament br"></div>
+</div>`;
+  el.innerHTML = pageShell('✾','✾','❁','❁',CORNER_SVG2) + pageHeader('స్వర్ణ స్మృతులు','బంగారు జ్ఞాపకాలు','కాలంలో నిలిచిన మధురమైన క్షణాలు') + `
+    <div class="gallery-grid">${grid}</div>
+    <div class="nav-area">
+      <button class="nav-btn" onclick="flipBack()">← వెనక్కి</button>
+      <div class="nav-dots">
+        <div class="nav-dot"></div><div class="nav-dot active"></div>
+        <div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div>
+      </div>
+      <button class="nav-btn" onclick="flipForward()">మరిన్ని →</button>
+    </div>
+  `;
+}
+
+// ---- BUILD PAGE 3: Gallery 2 — Moments of Joy ----
+function buildPage3(el){
+  let grid = '';
+  const p3imgs = [
+  'effects/WhatsApp Image 2026-05-10 at 6.36.07 PM.jpeg',   // slot 1 — తెల్లవారు
+  'effects/WhatsApp Image 2026-05-10 at 6.37.25 PM (1).jpeg',   // slot 2 — కలిసి
+  'effects/WhatsApp Image 2026-05-10 at 6.37.25 PM (2).jpeg',   // slot 3 — ప్రయాణం
+  'effects/WhatsApp Image 2026-05-10 at 6.37.25 PM.jpeg',   // slot 4 — ఆశీర్వాదాలు
+  'effects/WhatsApp Image 2026-05-10 at 6.37.26 PM.jpeg',   // slot 5 — నవ్వులు
+  'effects/WhatsApp Image 2026-05-10 at 6.39.19 PM.jpeg',   // slot 6 — అనుబంధాలు
+  'effects/WhatsApp Image 2026-05-10 at 6.44.05 PM (1).jpeg',   // slot 7 — నిలయం
+  'effects/WhatsApp Image 2026-05-10 at 6.44.05 PM (2).jpeg',   // slot 8 — పండుగలు
+  'effects/WhatsApp Image 2026-05-10 at 6.44.05 PM.jpeg',   // slot 9 — శాశ్వతం
+];
+for(let i=1;i<=9;i++) grid += `<div class="gallery-item${i===2?' tall':''}" onclick="openLightbox(${i},'gallery2')">
+  <img src="${p3imgs[i-1]}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"/>
+  <div class="gallery-overlay"></div>
+  <div class="corner-ornament tl"></div><div class="corner-ornament tr"></div>
+  <div class="corner-ornament bl"></div><div class="corner-ornament br"></div>
+</div>`;
+  el.innerHTML = pageShell('❋','❋','✽','✽',CORNER_SVG2) + pageHeader('ప్రేమ పరిచయం','ఆనంద క్షణాలు','ప్రతి ఋతువులో కలిసి') + `
+    <div class="gallery-alt">${grid}</div>
+    <div class="nav-area">
+      <button class="nav-btn" onclick="flipBack()">← జ్ఞాపకాలు</button>
+      <div class="nav-dots">
+        <div class="nav-dot"></div><div class="nav-dot"></div>
+        <div class="nav-dot active"></div><div class="nav-dot"></div><div class="nav-dot"></div>
+      </div>
+      <button class="nav-btn" onclick="flipForward()">వీడియో →</button>
+    </div>
+  `;
+}
+
+// ---- BUILD PAGE 4: Video ----
+function buildPage4(el){
+  el.innerHTML = pageShell('❀','❀','✿','✿',CORNER_SVG2) + pageHeader('చిరంజీవి ప్రేమ','మన కథ చలనచిత్రంలో','జ్ఞాపకాల ద్వారా చెప్పబడిన ప్రయాణం') + `
+    <div class="video-section">
+      <div class="video-frame-wrap">
+        <div class="video-outer-border">
+          <div class="video-frame-deco">✦ ఒక జీవితకాల జ్ఞాపకం ✦</div>
+          <video id="main-video" class="video-actual" controls muted playsinline src="" style="width:100%;display:none;"></video>
+          <div class="video-placeholder" id="video-placeholder" onclick="playVideo()">
+            <div class="play-btn">▶</div>
+            <div class="play-label">వార్షికోత్సవ వీడియో చూడండి</div>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(201,146,42,0.6);margin-top:4px;text-align:center;">CONFIG లో videoSrc సెట్ చేయండి</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:14px;position:relative;z-index:1;">
+        <div style="font-family:'Great Vibes',cursive;font-size:26px;color:var(--maroon);">మన ప్రేమతో</div>
+        <div class="gold-divider" style="width:160px;margin:8px auto;"></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--copper);line-height:1.7;">
+          మీ ప్రేమ వసంతంలో వేల మందారాల్లా<br>వికసిస్తూనే ఉండాలి.<br>
+          <em>— మీ కుటుంబం</em>
+        </p>
+        <div style="margin-top:10px;font-size:18px;">❤️ 🌸 ❤️</div>
+      </div>
+    </div>
+    <div class="nav-area">
+      <button class="nav-btn" onclick="flipBack()">← క్షణాలు</button>
+      <div class="nav-dots">
+        <div class="nav-dot"></div><div class="nav-dot"></div>
+        <div class="nav-dot"></div><div class="nav-dot active"></div><div class="nav-dot"></div>
+      </div>
+      <button class="nav-btn" onclick="flipForward()">ఆశీర్వాదాలు →</button>
+    </div>
+  `;
+}
+
+// ---- BUILD PAGE 5: Final Blessing / Message ----
+function buildPage5(el){
+  el.innerHTML = pageShell('🌸','🌺','✿','❁',CORNER_SVG) + pageHeader('ఆశీర్వాదం','శాశ్వత దీవెనలు','ఆనందమయ జీవితానికి ప్రార్థనలతో') + `
+    <div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;">
+      <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+        <g stroke="#C9922A" stroke-width="0.8" opacity="0.85">
+          <ellipse cx="40" cy="40" rx="36" ry="36"/>
+          <ellipse cx="40" cy="40" rx="26" ry="26"/>
+          <ellipse cx="40" cy="40" rx="16" ry="16"/>
+          <circle cx="40" cy="40" r="5" fill="#C9922A" opacity="0.5"/>
+          <circle cx="40" cy="40" r="2.5" fill="#F5D678" opacity="0.9"/>
+          <line x1="4" y1="40" x2="76" y2="40" stroke-width="0.5"/>
+          <line x1="40" y1="4" x2="40" y2="76" stroke-width="0.5"/>
+          <path d="M12 18 Q40 40 68 18" stroke-width="0.6"/>
+          <path d="M12 62 Q40 40 68 62" stroke-width="0.6"/>
+          <circle cx="4" cy="40" r="2.5" fill="#E8C55A" opacity="0.7"/>
+          <circle cx="76" cy="40" r="2.5" fill="#E8C55A" opacity="0.7"/>
+        </g>
+      </svg>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,24px);color:var(--maroon);line-height:1.5;">
+        మీ జీవన ప్రయాణం<br>ఆనందంతో, ప్రేమతో<br>&amp; బంగారు జ్ఞాపకాలతో నిండాలని
+      </div>
+      <div class="gold-divider" style="width:70%;margin:4px auto;"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:var(--copper);line-height:1.8;">
+        మీ ప్రేమ వేల మందారాల్లా<br>ప్రతి ఋతువులో వికసిస్తూ<br>రాబోయే ప్రతి సంవత్సరం<br>సుఖంగా గడవాలని.
+      </p>
+      <div class="gold-divider" style="width:50%;margin:4px auto;"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--maroon);">— మీ కుటుంబం</div>
+      <div style="font-size:18px;margin-top:6px;">❤️ 🌸 ❤️</div>
+    </div>
+    <div class="nav-area">
+      <button class="nav-btn" onclick="flipBack()">← వీడియో</button>
+      <div class="nav-dots">
+        <div class="nav-dot"></div><div class="nav-dot"></div>
+        <div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot active"></div>
+      </div>
+      <button class="nav-btn" onclick="flipForward()" style="opacity:0.3;cursor:default;">↩ మొదలు</button>
+    </div>
+  `;
+}
+
+// ============================
+// LOADING
+// ============================
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('loading').classList.add('hidden'),1800);
+});
+
+// ============================
+// PARTICLES
+// ============================
+(function(){
+  const canvas=document.getElementById('particles-canvas');
+  const ctx=canvas.getContext('2d');
+  let W=canvas.width=window.innerWidth,H=canvas.height=window.innerHeight;
+  const COLORS=['#F5D678','#E8C96A','#C9922A','#F7EDD8','#D2A679'];
+  const P=Array.from({length:70},()=>({
+    x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.5+0.5,
+    vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+    alpha:Math.random()*0.6+0.1,color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    pulse:Math.random()*Math.PI*2,pulseSpeed:Math.random()*0.02+0.01
+  }));
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    P.forEach(p=>{
+      p.pulse+=p.pulseSpeed;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color;ctx.globalAlpha=p.alpha*(0.6+0.4*Math.sin(p.pulse));ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    });
+    ctx.globalAlpha=1;requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize',()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;});
+})();
+
+// ============================
+// PETALS
+// ============================
+const PETALS=['🌸','🌺','✿','❁','🌼'];
+function spawnPetal(){
+  const el=document.createElement('div');el.className='petal';
+  el.textContent=PETALS[Math.floor(Math.random()*PETALS.length)];
+  el.style.cssText=`left:${Math.random()*100}vw;top:-20px;animation-duration:${8+Math.random()*8}s;animation-delay:${Math.random()*4}s;font-size:${10+Math.random()*10}px;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),(16+Math.random()*8)*1000);
+}
+setInterval(spawnPetal,2000);
+for(let i=0;i<5;i++) setTimeout(spawnPetal,i*400);
+
+// ============================
+// CARD OPEN TRANSITION
+// ============================
+let cardOpened=false;
+function openCard(){
+  if(cardOpened)return;
+  cardOpened=true;
+  const closed=document.getElementById('closed-card');
+  const container=document.getElementById('card-open-container');
+  closed.style.transition='all 0.7s cubic-bezier(0.4,0,0.2,1)';
+  closed.style.transform='perspective(1200px) rotateY(-90deg) scale(0.95)';
+  closed.style.opacity='0';
+  setTimeout(()=>{
+    closed.style.display='none';
+    initBook();
+    container.style.display='block';
+    container.style.opacity='0';
+    container.style.transition='all 0.7s cubic-bezier(0.4,0,0.2,1)';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      container.style.opacity='1';
+    }));
+  },650);
+}
+
+// ============================
+// BOOK FLIP ENGINE
+// ============================
+/*
+  5 pages → 3 leaves.
+  
+  Spread state (0–3):
+  ─────────────────────────────────────────────────────
+  spread 0 │ [blank left]  │ [page 1]  │  leaf1=0°
+  spread 1 │ [page 2 left] │ [page 3]  │  leaf1=-180°, leaf2=0°
+  spread 2 │ [page 4 left] │ [page 5]  │  leaf1=-180°, leaf2=-180°, leaf3=0°
+  spread 3 │ [blank right] │ back-cvr  │  all -180°  (book fully turned)
+  ─────────────────────────────────────────────────────
+
+  Leaf positions:
+  - All leaves' right edge = book's right edge (transform-origin: left)
+  - Unflipped (0°): page shows on RIGHT half
+  - Flipped (-180°): page swings to LEFT half (back face appears there)
+  
+  z-index: unflipped leaf that's currently "active" sits on top (highest z).
+  Flipped leaves go below.
+*/
+
+let spread=0;
+const TOTAL_SPREADS=3; // 0,1,2,3
+let isAnimating=false;
+
+const L1=document.getElementById('leaf-1');
+const L2=document.getElementById('leaf-2');
+const L3=document.getElementById('leaf-3');
+const LEAVES=[L1,L2,L3];
+
+function initBook(){
+  // Build page content
+  buildPage1(document.getElementById('pg-render-1'));
+  buildPage2(document.getElementById('pg-render-2'));
+  buildPage3(document.getElementById('pg-render-3'));
+  buildPage4(document.getElementById('pg-render-4'));
+  buildPage5(document.getElementById('pg-render-5'));
+
+  // Set initial transforms instantly (no transition)
+  LEAVES.forEach(l=>{ l.style.transition='none'; l.style.transform='rotateY(0deg)'; });
+
+  // z-index stack: leaf1 on top, leaf3 at bottom
+  L1.style.zIndex='30';
+  L2.style.zIndex='20';
+  L3.style.zIndex='10';
+
+  // Leaves 2 & 3 are hidden behind leaf 1 at start — that's fine by z-index
+  // But we hide them visually so they don't peek out
+  L2.style.opacity='0';
+  L3.style.opacity='0';
+
+  buildGNavDots();
+  updateGNav();
+
+  // Set book-spread height to match leaf content
+  setTimeout(()=>{
+    const h=L1.scrollHeight||600;
+    document.getElementById('book-spread').style.minHeight=Math.max(h,520)+'px';
+  },100);
+}
+
+function setTransition(leaf){
+  leaf.style.transition='transform 1.0s cubic-bezier(0.645,0.045,0.355,1.000)';
+}
+
+function flipForward(){
+  if(spread>=TOTAL_SPREADS||isAnimating)return;
+  isAnimating=true;
+
+  // Which leaf flips?
+  const leafIdx=spread; // 0→L1, 1→L2, 2→L3
+  const leaf=LEAVES[leafIdx];
+
+  if(spread===0){
+    // Show leaf 2 underneath before flipping leaf 1
+    L2.style.opacity='1';
+    L2.style.zIndex='20';
+    L1.style.zIndex='30';
+    setTransition(L1);
+    L1.style.transform='rotateY(-180deg)';
+  } else if(spread===1){
+    // Show leaf 3 underneath before flipping leaf 2
+    L3.style.opacity='1';
+    L3.style.zIndex='15';
+    L2.style.zIndex='25';
+    L1.style.zIndex='10';
+    setTransition(L2);
+    L2.style.transform='rotateY(-180deg)';
+  } else if(spread===2){
+    L3.style.zIndex='20';
+    L2.style.zIndex='10';
+    setTransition(L3);
+    L3.style.transform='rotateY(-180deg)';
+  }
+
+  setTimeout(()=>{
+    spread++;
+    updateGNav();
+    isAnimating=false;
+  },1020);
+}
+
+function flipBack(){
+  if(spread<=0||isAnimating)return;
+  isAnimating=true;
+
+  if(spread===1){
+    // Un-flip leaf 1
+    L1.style.zIndex='30';
+    setTransition(L1);
+    L1.style.transform='rotateY(0deg)';
+    setTimeout(()=>{
+      L2.style.opacity='0';
+      spread=0; updateGNav(); isAnimating=false;
+    },1020);
+  } else if(spread===2){
+    // Un-flip leaf 2
+    L2.style.zIndex='25';
+    L1.style.zIndex='10';
+    setTransition(L2);
+    L2.style.transform='rotateY(0deg)';
+    setTimeout(()=>{
+      L3.style.opacity='0';
+      spread=1; updateGNav(); isAnimating=false;
+    },1020);
+  } else if(spread===3){
+    // Un-flip leaf 3
+    L3.style.zIndex='20';
+    setTransition(L3);
+    L3.style.transform='rotateY(0deg)';
+    setTimeout(()=>{
+      spread=2; updateGNav(); isAnimating=false;
+    },1020);
+  }
+}
+
+function goToSpread(target){
+  if(target===spread||isAnimating)return;
+  const dir=target>spread?1:-1;
+  const fn=dir>0?flipForward:flipBack;
+  let steps=Math.abs(target-spread);
+  function step(){
+    if(steps-->0){ fn(); setTimeout(step,1080); }
+  }
+  step();
+}
+
+// Global nav dots — 5 pages mapped to 4 dot positions (by spread)
+function buildGNavDots(){
+  const c=document.getElementById('gnav-dots');
+  c.innerHTML='';
+  // Labels: cover=0, p2-3=1, p4-5=2, end=3
+  const labels=['పేజీ ౧','పేజీలు ౨–౩','పేజీలు ౪–౫','చివర'];
+  labels.forEach((lbl,i)=>{
+    const d=document.createElement('div');
+    d.className='gnav-dot'+(i===0?' active':'');
+    d.title=lbl;
+    d.onclick=()=>goToSpread(i);
+    c.appendChild(d);
+  });
+}
+
+function updateGNav(){
+  document.querySelectorAll('.gnav-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===spread);
+  });
+  document.getElementById('btn-prev').disabled=spread<=0;
+  document.getElementById('btn-next').disabled=spread>=TOTAL_SPREADS;
+}
+
+// ============================
+// LIGHTBOX
+// ============================
+// Lines 994–1005 — REPLACE openLightbox() with:
+const LIGHTBOX_IMGS = {
+  gallery1: [
+    'effects/IMG_20260510_192646.jpg.jpeg','effects/IMG_20260510_192727.jpg.jpeg','effects/IMG_20260510_192528.jpg.jpeg','effects/IMG_20260510_192614.jpg.jpeg','effects/IMG_20260510_193555.jpg.jpeg','effects/IMG_20260510_192449.jpg.jpeg','effects/IMG_20260510_192830.jpg.jpeg','effects/IMG_20260510_192257.jpg.jpeg','effects/IMG_20260510_193131.jpg.jpeg'
+  ],
+  gallery2: [
+    'effects/WhatsApp Image 2026-05-10 at 6.36.07 PM.jpeg',   // slot 1 — తెల్లవారు
+  'effects/WhatsApp Image 2026-05-10 at 6.37.25 PM (1).jpeg',   // slot 2 — కలిసి
+  'effects/WhatsApp Image 2026-05-10 at 6.37.25 PM (2).jpeg',   // slot 3 — ప్రయాణం
+  'effects/WhatsApp Image 2026-05-10 at 6.37.25 PM.jpeg',   // slot 4 — ఆశీర్వాదాలు
+  'effects/WhatsApp Image 2026-05-10 at 6.37.26 PM.jpeg',   // slot 5 — నవ్వులు
+  'effects/WhatsApp Image 2026-05-10 at 6.39.19 PM.jpeg',   // slot 6 — అనుబంధాలు
+  'effects/WhatsApp Image 2026-05-10 at 6.44.05 PM (1).jpeg',   // slot 7 — నిలయం
+  'effects/WhatsApp Image 2026-05-10 at 6.44.05 PM (2).jpeg',   // slot 8 — పండుగలు
+  'effects/WhatsApp Image 2026-05-10 at 6.44.05 PM.jpeg',  // Forever
+  ]
+};
+
+function openLightbox(idx, gallery){
+  const lb = document.getElementById('lightbox');
+  const ph = document.getElementById('lightbox-bg-placeholder');
+  const imgEl = document.getElementById('lightbox-img');
+  const src = LIGHTBOX_IMGS[gallery][idx - 1];
+  ph.style.display = 'none';
+  imgEl.src = src;
+  imgEl.style.display = 'block';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e){
+  if(!e||e.target===document.getElementById('lightbox')||e.currentTarget===document.getElementById('lightbox-close')){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+
+// ============================
+// VIDEO
+// ============================
+function playVideo(){
+  const video=document.getElementById('main-video');
+  const ph=document.getElementById('video-placeholder');
+  if(CONFIG.videoSrc){
+    video.src=CONFIG.videoSrc;ph.style.display='none';
+    video.style.display='block';video.muted=false;video.play();
+  } else {
+    ph.querySelector('.play-label').textContent='CONFIG లో videoSrc సెట్ చేయండి';
+  }
+}
+
+// ============================
+// MUSIC
+// ============================
+// REPLACE WITH:
+let musicPlaying=false;
+const music=document.getElementById('bg-music');
+function toggleMusic(){
+  const btn=document.getElementById('music-toggle');
+  musicPlaying=!musicPlaying;
+  if(musicPlaying){ music.play(); }
+  else { music.pause(); }
+  btn.textContent=musicPlaying?'🔊':'🎵';
+  btn.classList.toggle('muted',!musicPlaying);
+}
+
+// ============================
+// KEYBOARD
+// ============================
+document.addEventListener('keydown',e=>{
+  if(!cardOpened)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')flipForward();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')flipBack();
+  if(e.key==='Escape')closeLightbox({target:document.getElementById('lightbox')});
+});
+</script>
+</body>
+</html>
